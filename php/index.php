@@ -4,19 +4,20 @@
 <title> Hello World </title>
 </head>
 <body>
+<form action="./1-5.php" method="post">
+Your Name:
+<input type="text" name="YourName"><BR>
+Cost of Lunch:
+<input type="text" name="CostOfLunch"><BR>
+Days Buying Lunch:
+<input type="text" name="DaysBuyingLunch"><BR>
+<input type="submit" name="x" value="Compute"><BR>
+</form>
+
 <p><?php
 
 print ("hello world\n"); 
 
-if (!isset( $_SERVER['HTTP_USER_AGENT']))
-{
-	print ("You are at home\n");
-}
-else
-{
-	print ($HTTP_USER_AGENT);
-	print("\n");
-}
 ?></p>
 </body>
 </html>
