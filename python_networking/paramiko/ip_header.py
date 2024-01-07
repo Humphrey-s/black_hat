@@ -3,7 +3,7 @@ import struct
 import socket
 from ctypes import *
 
-class IP(Structure):
+class Ip(Structure):
 
     _fields_ = [
             ("ihl", c_ubyte, 4),
@@ -25,6 +25,12 @@ class IP(Structure):
 
     def __init__(self, socket_buffer=None):
 
+        try:
+            header = struct.unpack("<BBHHHBBH4s4s", socket_buffer)
+            self.ver = header[0] >> 4
+        except struct.error:
+            pass
+
         self.src_address = socket.inet_ntoa(struct.pack("<L", self.src))
         self.dst_address = socket.inet_ntoa(struct.pack("<L", self.dst))
 
@@ -35,3 +41,15 @@ class IP(Structure):
         except Exception as e:
 
             print("%s No protocol for %s".format(e, self.protocol_num))
+
+class ICMP:
+
+    def __init__(self, buff):
+
+        header = struct.unpack("<BBHHH", buff)
+
+        self.type = header[0]
+        self.code = header[1]
+        self.sum = header[2]
+        self.id = header[3]
+        self.seq = header[4]
