@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 import requests
+from tabulate import tabulate
 from bs4 import BeautifulSoup
 
 
@@ -54,9 +55,35 @@ def epl_table():
                 table[i] = table_dic_t
 
                 i = i + 1
-        print(table)
+        a = 1;
+
+        table_lst = []
+
+        dict1 = {}
+        lst1 = []
+        array = []
+        d = 0
+        array = [["No", "Club","Pl", "W", "D", "L", "GD", "Pts"]]
+
+        for a in table.keys():
+
+            lst1 = []
+            value = table[a];
+            lst1.append(a);
+
+            for a in value.keys():
+
+                b = value[a];
+                lst1.append(a)
+
+            for c in b.keys():
+
+                lst1.append(b[c])
+
+            array.append(lst1)
+
+        print(tabulate(array, headers="firstrow", tablefmt="fancy_grid"))
     else:
         print("fatal")
-
 if __name__ == "__main__":
     epl_table()
